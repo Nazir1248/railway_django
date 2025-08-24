@@ -29,6 +29,6 @@ from django.contrib import admin
 from django.urls import path, include  # <-- Import 'include'
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("secure-adminpanel/", admin.site.urls),
     path("", include('collector.urls')),  # <-- Change this line
 ]
