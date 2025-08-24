@@ -23,15 +23,12 @@
 
 
 
-from django.contrib import admin
-from django.urls import path
-from django.http import HttpResponse
+# railway_django/urls.py
 
-# A simple view that is guaranteed to work
-def home_view(request):
-    return HttpResponse("Hello, Railway! The health check is working.")
+from django.contrib import admin
+from django.urls import path, include  # <-- Import 'include'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home_view, name="home"),  # ✅ Add this line for the homepage
+    path("", include('collector.urls')),  # <-- Change this line
 ]

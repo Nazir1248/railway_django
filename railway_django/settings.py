@@ -173,6 +173,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'collector',
 ]
 
 MIDDLEWARE = [
@@ -191,7 +192,7 @@ ROOT_URLCONF = 'railway_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -237,7 +238,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles" # For production collectstatic
 
+# ADD THIS to help Django find your app's static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "collector/static",
+]
 # Use WhiteNoise to serve static files in production
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
